@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stone - Paper - Scissors</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .choices {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    .choice {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      font-size: 3rem;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .choice:hover {
+      transform: scale(1.2);
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .result, .moves {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Stone - Paper - Scissors</h1>
+
+  <div class="choices">
+    <div class="choice" onclick="play('rock')">🪨</div>
+    <div class="choice" onclick="play('paper')">📄</div>
+    <div class="choice" onclick="play('scissors')">✂️</div>
+  </div>
+
+  <div id="moves" class="moves"></div>
+  <div id="result" class="result"></div>
+
+  <footer>Made ️ by Joseph Tumkama Kufre </footer>
+
+  <script>
+    const emojiMap = {
+      rock: '🪨',
+      paper: '📄',
+      scissors: '✂️'
+    };
+
+    function play(playerChoice) {
+      const choices = ['rock', 'paper', 'scissors'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      let result = '';
+
+      if (playerChoice === computerChoice) {
+        result = "It's a draw! 🤝";
+      } else if (
+        (playerChoice === 'rock' && computerChoice === 'scissors') ||
+        (playerChoice === 'paper' && computerChoice === 'rock') ||
+        (playerChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        result = `You win! 🎉`;
+      } else {
+        result = `You lose! 😢`;
+      }
+
+      document.getElementById('moves').innerHTML = `You chose ${emojiMap[playerChoice]} &nbsp;&nbsp;|&nbsp;&nbsp; Computer chose ${emojiMap[computerChoice]}`;
+      document.getElementById('result').innerHTML = result;
+    }
+  </script>
+
+</body>
+</html>
